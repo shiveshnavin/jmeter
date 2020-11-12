@@ -1,0 +1,70 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>con.test.jmeter-perftests</groupId>
+	<artifactId>con.test.jmeter-perftests</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<properties>
+	</properties>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>com.lazerycode.jmeter</groupId>
+				<artifactId>jmeter-maven-plugin</artifactId>
+				<version>3.1.1</version>
+				<configuration>
+					
+					<suppressJMeterOutput>false</suppressJMeterOutput>
+					<testResultsTimestamp>false</testResultsTimestamp>
+					<!-- Change the result format from default csv to xml. Might not be 
+						needed... -->
+					<resultsFileFormat>xml</resultsFileFormat>
+					<downloadExtensionDependencies>false</downloadExtensionDependencies>
+					 <generateReports>true</generateReports>
+					<jmeterExtensions>
+						<artifact>kg.apc:jmeter-plugins-cmn-jmeter:jar:0.5</artifact>
+						<artifact>kg.apc:jmeter-plugins-json:jar:2.6</artifact>
+											<artifact>org.yaml:snakeyaml:1.21</artifact>
+<artifact>kg.apc:cmdrunner:2.2</artifact>
+<artifact>kg.apc:jmeter-plugins-cmn-jmeter:0.4</artifact>
+
+					</jmeterExtensions>
+			
+				</configuration>
+				<executions>
+				
+				        <!-- Generate JMeter configuration -->
+        <execution>
+            <id>configuration</id>
+            <goals>
+                <goal>configure</goal>
+            </goals>
+        </execution>
+		
+		<!-- Fail build on errors in test -->
+        <execution>
+            <id>jmeter-check-results</id>
+            <goals>
+                <goal>results</goal>
+            </goals>
+        </execution>
+		
+					<execution>
+						<id>jmeter-tests</id>
+						<goals>
+							<goal>jmeter</goal>
+						</goals>
+					</execution>
+				</executions>
+				<dependencies>
+					<dependency>
+						<groupId>kg.apc</groupId>
+						<artifactId>jmeter-plugins-cmn-jmeter</artifactId>
+						<version>0.5</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+			</plugins>
+	</build>
+</project>
